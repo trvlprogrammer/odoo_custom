@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_machine_tree" model="ir.ui.view">
+        <field name="name">q3d.machine.tree</field>
+        <field name="model">q3d.machine</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="suffix"/>
+                <field name="hours"/>
+                <field name="material_id"/>
+                <field name="material_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_machine_form" model="ir.ui.view">
+        <field name="name">q3d.machine.form</field>
+        <field name="model">q3d.machine</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="suffix"/>
+                        <field name="hours"/>
+                        <field name="material_id"/>
+                        <field name="material_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <act_window name="Machines" res_model="q3d.machine" id="mrp_assembly_machine_action" view_mode="tree,form"/>    
+</odoo>

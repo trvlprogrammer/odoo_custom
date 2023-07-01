@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_q3d_step,q3d_step,model_q3d_step,,1,1,1,1
+access_q3d_stage,q3d_stage,model_q3d_stage,base.group_user,1,1,1,1
+access_q3d_batch,q3d_batch,model_q3d_batch,base.group_user,1,1,1,1
+access_q3d_sorter,q3d_sorter,model_q3d_sorter,base.group_user,1,1,1,1
+access_q3d_machine,q3d_machine,model_q3d_machine,base.group_user,1,1,1,1
+access_q3d_defect,q3d_defect,model_q3d_defect,base.group_user,1,1,1,1
+access_q3d_defect_reason,q3d_defect_reason,model_q3d_defect_reason,base.group_user,1,1,1,1
+access_q3d_inspection,q3d_inspection,model_q3d_inspection,base.group_user,1,1,1,1

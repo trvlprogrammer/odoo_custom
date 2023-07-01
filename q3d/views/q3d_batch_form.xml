@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="q3d_batch_form" model="ir.ui.view">
+        <field name="name">q3d.batch.form.view</field>
+        <field name="model">q3d.batch</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="General Information">
+                        <field name="name"/>
+                        <field name="project_id"/>
+                        <field name="task_id"/>
+                        <field name="task_detail"/>
+                        <field name="state"/>
+                        <field name="color"/>
+                        <field name="sequence"/>
+                        <field name="priority"/>
+                        
+                        <field name="qty_orders"/>
+                        <field name="qty_parts"/>
+                        <field name="qty_items"/>
+
+                        <field name="stage_id"/>
+                        <field name="stage_codename"/>
+                        <field name="comment"/>
+                        <field name="machine_id"/>
+                        <field name="material_id"/>
+                        <field name="date_start"/>
+                        <field name="date_planned"/>
+                        <field name="date_end"/>
+                        <field name="date_due_min"/>
+                        <field name="hours"/>
+                        <field name="user_id"/>
+                        <field name="tag_ids"/>
+                        <field name="step_ids">
+                            <tree string="Assigned Lots" create="false" delete="false" edit="false" editable="bottom">
+                                <field name="qty_lot"/>
+                                <field name="lot_id"/>
+                                <field name="task_id"/>
+                                <field name="quantity"/>
+                                <field name="next_id"/>
+                                <field name="responsible"/>
+                                <field name="partname"/>
+                                <field name="mapped_filename"/>
+                                <field name="date_start"/>
+                            </tree>
+                        </field>                        
+                        <field name="mapping_notes"/>                        
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+</odoo>

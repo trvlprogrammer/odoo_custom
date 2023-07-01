@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Opening task when double clicking on project -->
+    <record id="dblc_task" model="ir.actions.act_window">
+        <field name="res_model">q3d.batch</field>
+        <field name="name">Task's Batches</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,graph,kanban</field>
+        <field name="domain">[('task_id', '=', active_id)]</field>
+        <field name="context">{'task_id':active_id}</field>
+    </record>
+    
+    
+    <!--2Fix: Delete. I bet this one is not operational..-->
+    <record id="act_project_project_2_project_task_all" model="ir.actions.act_window">
+        <field name="name">Tasks</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
+        <field name="context">{
+            'search_default_project_id': [active_id],
+            'default_project_id': active_id,
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click <i>Create</i> to start a new task.
+            </p><p>
+                This action is basically for filtering tasks by the active project.<br/>
+                It's a bit surprising there's no existing actionable entry for this.. 2Fix: ?
+            </p>
+        </field>
+    </record>
+
+
+    
+
+    <record id="view_task_kanban_completion" model="ir.ui.view">
+        <field name="name">project.task.kanban.completion</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
+                <button class="btn btn-link border-0" name="get_q3d_batches" type="object">
+                    <div>
+                        <span class="o_label">
+                            <b>Completion</b>
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

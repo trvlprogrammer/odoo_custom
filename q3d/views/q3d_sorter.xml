@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="q3d_sorter_form" model="ir.ui.view">
+            <field name="name">q3d.batch.form.view</field>
+            <field name="model">q3d.sorter</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form class="p-0">
+                    <field name="iframe_web" widget="html"/>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

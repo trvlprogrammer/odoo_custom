@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_batch_search_form" model="ir.ui.view">
+        <field name="name">q3d.batch.search.form</field>
+        <field name="model">q3d.batch</field>
+        <field name="arch" type="xml">
+            <search string="Batches">
+                <field name="name" string="Batches"/>
+                <field name="project_id"/>
+                <field name="task_id"/>
+                <filter name="group_by_project"
+                        string="Project"
+                        context="{'group_by': 'project_id'}"/>
+                <filter name="group_by_task"
+                        string="Task"
+                        context="{'group_by': 'task_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="act_project_project_batch_all" model="ir.actions.act_window">
+        <field name="name">Completion</field>
+        <field name="res_model">q3d.batch</field>
+        <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
+        <field name="context">{
+            'search_default_task_id': [active_id],
+            'default_task_id': active_id,
+            }
+        </field>
+        <field name="search_view_id" ref="view_batch_search_form"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                <i>Create</i>
+                a new batch.
+            </p>
+            <p>
+            </p>
+        </field>
+    </record>
+
+    <record id="view_project_kanban_completion" model="ir.ui.view">
+        <field name="name">project.project.timesheet.kanban.completion</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="priority">24</field>
+        <field name="arch" type="xml">
+            <xpath expr="//a[hasclass('o_project_kanban_box')]" position="before">
+                <button class="btn btn-link" name="get_q3d_batches" type="object">
+                    <div style="margin-top: -5px;"><b>Completion</b></div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

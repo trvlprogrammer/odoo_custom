@@ -1,0 +1,78 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<odoo>
+
+  <record id = "part_log_tree_view_fo" model = "ir.ui.view" >
+    <field name = "arch" type = "xml" >
+      <tree string = "Production Log">
+          <field name = "lot_id" />
+          <field name = "task_id" />
+          <field name = "batch_id" />
+          <field name = "responsible" />
+          <field name = "date_start" />
+         </tree>
+    </field>
+    <field name="model">q3d.step</field>
+    <field name="name">Default tree view for q3d.step</field>
+    <field name="type">tree</field>
+  </record>
+
+  <record id="part_log_form_view_fo" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group col="4">
+            <field name="lot_id"/>
+            <field name="task_id"/>
+            <field name="responsible"/>
+            <field name="date_start"/>
+            <field name="batch_id"/>
+            <field name="next_id"/>
+            <field name="ttp"/>
+            <field name="redo"/>
+          </group>
+
+          <field name="defect_ids"/>
+
+          <notebook>              
+              <page string="Quantities">
+                <group col="4">
+                  <field name="quantity"/>
+                  <field name="qty_total"/>
+                  <field name="qty_lot"/>
+                  <field name="qty_found"/>
+                  <field name="qty_defect"/>
+                  <separator/>
+                </group>
+              </page>                          
+            <page string="Stage Details">
+              <group col="4">
+                <field name="task_override_id"/>            
+                <field name="task_codename"/>
+                <field name="stage_id"/>
+                <separator/>
+              </group>
+            </page>
+            
+            <page string="Auxiliaries">
+              <group col="4">
+                <field name="partname"/>
+                <field name="mapped_filename"/>
+                <field name="material_code"/>
+                <field name="operator"/>
+                <field name="volume"/>
+                <field name="bounding_box"/>
+                <separator/>
+              </group>
+            </page>
+
+              
+            </notebook>
+          </sheet>
+      </form>
+    </field>
+    <field name="model">q3d.step</field>
+    <field name="name">Default form view for q3d.step</field>
+    <field name="type">form</field>
+  </record>
+  
+</odoo>

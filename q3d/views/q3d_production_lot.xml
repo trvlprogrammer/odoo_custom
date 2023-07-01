@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+
+    <record id="view_inherit_production_lot_form" model="ir.ui.view">
+        <field name="name">stock.production.lot.form.inherit</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//group[@name='main_group']" position="replace">
+                    <group>
+                      <group>                        
+                        <field name="sale_id"/>
+                        <field name="partner_id"/>
+                        <field name="qty_total"/>
+                        <field name="qty_lot"/>
+                        <field name="redo"/>
+                        <separator/>
+                        <field name="image_url" widget="image_url"/>
+                      </group>
+                      <group string="Production Log">
+                        <field name="step_ids" nolabel="1">
+                            <tree limit="10" edit="false" create="false" delete="false">
+                                <field name="task_id"/>
+                                <field name="batch_id"/>
+                                <field name="responsible"/>
+                                <field name="date_start"/>
+                            </tree>
+                        </field>
+                        <group colspan="2">
+                        <field name="volume"/>
+                        <field name="bounding_box"/>
+                        <field name="description"/>
+                        <field name="volume_box"/>
+                        <field name="comment"/>
+                        <field name="partname"/>
+                        </group>
+                      </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="sale_line_id"/>
+                            <field name="date_order"/>
+                            <field name="date_commitment"/>
+                        </group>
+                        <group>
+                            <field name="state"/>
+                            <field name="init_code"/>
+                            <field name="non_conformities"/>                            
+                        </group>
+                    </group>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+
+<record id="q3d_kanban_stage_view_form" model="ir.ui.view">
+        <field name="name">Kanban Stage - Q3D View</field>
+        <field name="model">base.kanban.stage</field>
+        <field name="inherit_id" ref="base_kanban_stage.base_kanban_stage_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='fold']" position="after">
+                <field name="stage_code"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="product_variant_q3d_code_view" model="ir.ui.view">
+        <field name="name">product.product.view.form.line.code</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="q3d_code"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="view_inherit_production_lot_tree" model="ir.ui.view">
+        <field name="name">stock.production.lot.tree.inherit</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='ref']" position="replace"/>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="partner_id"/>
+                    <field name="shipping_id"/>
+                    <field name="bounding_box"/>
+                    <field name="image_url" widget="image_url" string="Image"/>
+                    <field name="date_due"/>
+                    <field name="price_unit"/>
+                    <field name="ordered_qty"/>
+                    <field name="qty_total"/>
+                    <field name="qty_lot"/>
+                    <field name="qty_file"/>
+                    <!--<field name="state"/>-->
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+</odoo>
