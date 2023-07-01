@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+<template id="report_lot_barcode_assembly">
+    <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="o">
+            <div class="page" style="page-break-after: always;">
+                <div class="row">
+                    <div class="col-12" style="max-height:300px">
+                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:100%;height:50px;"  alt="Barcode"/>
+                        <p style="font-weight:bold;">
+                            <span t-field="o.name"/> / Your ref.:<span t-field="o.sale_id.client_order_ref" /><br/>
+                            <span t-field="o.partner_id"/>
+                        </p>                        
+                    </div>                    
+                </div>
+                <div class="row" >
+                    <div class="col-9" style="max-height:150px; line-height:150px; height: 200px; position: relative;
+    overflow: hidden;">
+                        <img t-if="o.sale_line_id.image_filename" t-att-src="o.sale_line_id.image_url" style="max-height:300px;max-width:500px; position: absolute;
+    top: -9999px;
+    bottom: -9999px;
+    left: -9999px;
+    right: -9999px;
+    margin: auto;"/>
+                    </div>
+                    <div class="col-3 text-right" style="margin-top:30px;">
+                        <t t-raw="o.html_color_widget"/>
+                        <span t-esc="'%.0fx' % o.ordered_qty" style="font-size: 25px; font-weight:bold;" />
+                    </div>
+                </div>
+                <div class="row mt16">
+                    <table>
+                        <tr><td width="25%">Pos</td><td width="75%">: <span t-field="o.sale_line_id.rpp_sequence"/></td></tr>
+                        <tr><td>Part</td><td>: <span t-field="o.sale_line_id.rpp_filename"/></td></tr>
+                        <tr><td>Mat</td><td>: <span t-field="o.product_id.name" /></td></tr>
+                        <tr><td>Qty</td><td>: <span t-esc="'%.0f' % o.ordered_qty"/></td></tr>
+                        <!--<tr><td>Qty</td><td>: <span t-if="o.product_qty != o.ordered_qty"><span t-esc="'%.0f' % o.product_qty"/> of <span t-esc="'%.0f' % o.ordered_qty"/> </span> </td></tr>-->
+                        <tr><td>Post</td><td>: <span t-field="o.sale_line_id.rpp_post_processing_services"/></td></tr>
+                        <tr><td>Color</td><td>: <span t-field="o.sale_line_id.rpp_colour"/></td></tr>
+                        <tr t-if="o.sale_line_id.custom_info" style="color:red;"><td>Custom Info</td><td>: <span t-field="o.sale_line_id.custom_info"/></td></tr>
+                        <tr style="color:red;"><td>Custom Info</td><td>: <span t-field="o.non_conformities" style="color:red;"/></td></tr>
+                    </table>
+                </div>                    
+                                                        
+                <div class="footer text-center" style="font-size:20px;">                                
+                
+                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height:30mm; margin: 2px;"/>
+                        
+
+                </div>
+                
+    
+            </div>
+            
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

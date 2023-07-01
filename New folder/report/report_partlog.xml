@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_partlog_document">
+    <t t-call="web.external_layout">
+        <t t-set="doc" t-value="doc.with_context(lang=doc.sale_id.partner_id.lang)" />
+        <t t-set="address">
+        <strong>Customer:</strong>
+            <div t-field="doc.sale_id.partner_id"
+                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+            <p t-if="doc.sale_id.partner_id.vat"><t t-esc="doc.sale_id.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.sale_id.partner_id.vat"/></p>
+        </t>
+        <t t-set="information_block">
+            <strong>Shipping address:</strong>
+            <div t-field="doc.sale_id.partner_shipping_id"
+                t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+        </t>
+
+        <div class="page" style="font-family:Poppins,Roboto,Helvetica;">
+            <div class="oe_structure"/>
+
+            <h2>            
+                <span>Production Log # </span><span t-field="doc.name"/>
+            </h2>
+
+            <div class="row mt32 mb32" id="informations">
+                <div t-if="doc.sale_id.client_order_ref" class="col-auto mw-100 mb-2">
+                    <strong>Your Reference:</strong>
+                    <p class="m-0" t-field="doc.sale_id.client_order_ref"/>
+                </div>
+                <div class="col-auto mw-100 mb-2">
+                    <strong>Delivery (planned):</strong>
+                    <p class="m-0" t-field="doc.sale_id.commitment_date" t-options="{'widget': 'date'}"/>
+                </div>
+                <div t-if="doc.sale_id.confirmation_date and doc.sale_id.state not in ['draft','sent']" class="col-auto mw-100 mb-2">
+                    <strong>Date Ordered:</strong>
+                    <p class="m-0" t-field="doc.sale_id.confirmation_date"/>
+                </div>
+                <div t-if="doc.sale_id.date_order and doc.sale_id.state in ['draft','sent']" class="col-auto mw-100 mb-2">
+                    <strong>Quotation Date:</strong>
+                    <p class="m-0" t-field="doc.sale_id.date_order"/>		    
+                </div>
+                <div t-if="doc.sudo().sale_id.user_id.name" class="col-auto mw-100 mb-2">
+                    <strong>Salesperson:</strong>
+                    <p class="m-0" t-field="doc.sudo().sale_id.user_id"/>
+                </div>
+                <div name="payment_term" t-if="doc.sale_id.payment_term_id" class="col-auto mw-100 mb-2">
+                    <strong>Payment&amp;nbsp;Terms:</strong>
+                    <p class="m-0" t-field="doc.sale_id.payment_term_id"/>
+                </div>
+                <div t-if="doc.sale_id.validity_date and doc.sale_id.state in ['draft', 'sent']" class="col-auto mw-100 mb-2">
+                    <strong>Expiration Date:</strong>
+                    <p class="m-0" t-field="doc.sale_id.validity_date"/>
+                </div>
+            </div>
+
+            <!-- Is there a discount on at least one line? -->
+            <t t-set="display_discount" t-value="any([l.discount for l in doc.sale_id.order_line])"/>
+
+            <table class="table table-sm o_main_table">
+            <colgroup>
+                        <col span="1" style="width: 30%;"/>
+                        <col span="1" style="width: 11%;"/>
+                        <col span="1" style="width: 9%;"/>
+                        <col span="1" style="width: 9%;"/>
+                        <col span="1" style="width: 14%;"/>
+                        <col span="1" style="width: 14%;"/>
+                        <col span="1" style="width: 14%;"/>
+                    </colgroup>
+                <thead style="background-color: black; color: white;">
+                    <tr>
+                        <!-- TODO: remove in master -->
+                        <th class="text-left">Description</th>
+                        <th class="text-left">Image</th>
+                        <th class="text-right">Quantity</th>
+                        <th class="text-right">Unit Price</th>                        
+                        <th class="text-right">Production Step</th>
+                        <th class="text-right">Responsible</th>
+                        <th class="text-right">Time Started</th>
+                    </tr>
+                </thead>
+                <tbody class="sale_tbody">
+
+                    <t t-set="line" t-value="doc.sale_line_id"/>
+                        <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                <td rowspan="0"><span t-field="line.name"/></td>
+                                <td rowspan="0">
+                                    <img t-if="line.image_filename" t-att-src="line.image_url" style="max-width: 150px; max-height: 200px;"/>
+                                </td>
+                                <td class="text-right" rowspan="0">
+                                    <span t-field="line.product_uom_qty"/>
+                                    <span t-field="line.product_uom" groups="uom.group_uom"/>
+                                </td>
+                                <td class="text-right" rowspan="0">
+                                    <span t-field="line.price_unit"/>
+                                </td>
+                                <td colspan="3">
+                                    <table>
+                                        <colgroup>
+                                            <col span="1" style="width: 33%;"/>
+                                            <col span="1" style="width: 34%;"/>
+                                            <col span="1" style="width: 33%;"/>
+                                        </colgroup>
+                                    <tbody>
+                                    <t t-foreach="doc.step_ids" t-as="log">
+                                        <tr>
+                                            <td><span t-field="log.stage_id"/></td>
+                                            <td><span t-field="log.responsible"/></td>
+                                            <td><span t-field="log.date_start"/></td>
+                                            <t t-set="first" t-value="false"/>
+                                        </tr>
+                                    </t>
+                                    </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        
+                </tbody>
+            </table>
+            
+            <p t-if="doc.non_conformities" style="text-align:right;">
+                <strong>Non conformities:</strong>
+                <span t-field="doc.non_conformities"/>
+            </p>
+
+            <p>
+                <strong>Communication:</strong>            
+            <div style="font-size:12px;">
+                <t t-foreach="doc.message_ids" t-as="message">                
+                    <div style="margin-top:20px;"><strong><span t-field="message.date"/> <span t-field="message.email_from"/> <span t-field="message.subject"/></strong></div>
+                    <div>
+                        <span t-field="message.body"/>                    
+                        <t t-raw="message.tracking_summary"/>
+                    </div>
+                </t>
+            </div>
+            </p>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+
+<template id="report_partlog">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="spx_vesco.report_partlog_document" t-lang="doc.sale_id.partner_id.lang"/>
+        </t>
+    </t>
+</template>
+
+<template id="report_partlog_mailing">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-set="with_images" t-value="True"/>
+            <t t-call="spx_vesco.report_partlog_document" t-lang="doc.sale_id.partner_id.lang"/>
+        </t>
+    </t>
+</template>
+
+</odoo>

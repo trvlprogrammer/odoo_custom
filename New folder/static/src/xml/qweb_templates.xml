@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-extend="stock_barcode_lines_template">
+        <t t-jquery="div[t-if='line.owner_id']" t-operation="after">
+            <div t-if="line.item_dsc">
+                <span t-esc="line.item_dsc"/>
+            </div>
+            <div t-if="line.item_img">
+                <img t-attf-src="line.item_img" class="ml8" alt="Lot Image" style="max-width:150px; max-height:150px;"/>
+            </div>
+        </t>
+    </t>
+</templates>

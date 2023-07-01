@@ -1,0 +1,61 @@
+# -*- coding: utf-8 -*-
+
+
+{
+    'name': "Vesco",
+    'summary': "v.1.1",
+    'version': '1.1',
+    'description': """
+Vesco Customized Reports
+    """,
+    'author': "Paul Cherepanov, vi3ual@gmail.com",
+    'website': "http://paulautomation.com",
+    'category': 'Sales Management',
+    'depends': [
+        'base',
+        'sale',
+        'stock',
+        'delivery',
+        'account',
+        'sale_stock',
+        'stock_barcode',
+        'web_widget_color',
+        'odoo_shipping_service_apps',
+        'purchase',
+        'mrp',
+        'web',
+        'q3d',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/pod_paperformat_data.xml',
+        'report/pod_report_layouts.xml',
+        'report/pod_report_wrappers.xml',
+        'report/report_deliveryslip.xml',
+        'report/report_invoice.xml',        
+        'report/pod_report_sale.xml',
+        'report/pod_report_sleek-SO.xml',
+        'report/pod_report_sleek-INV.xml',
+        'report/pod_report_sleek-PO.xml',
+        'report/pod_report_sleek-WH.xml',        
+        'report/report_purchase_order.xml',
+        'report/report_purchase_quotation.xml',
+        'report/report_stockpicking_operations.xml',
+        'report/report_lot_barcode.xml',
+        'report/pod_report_lot_assembly.xml',
+        'report/report_lot_part_label.xml',
+        'report/pod_report_box_label (picking).xml',
+        'report/report_partlog.xml',
+        'data/mail_template_data.xml',
+        'views/stock_picking_views.xml',
+        'open_invoices/spx_vesco_open_invoices_wizard.xml',
+        'views/rpp_mappings_views.xml',
+        'views/rpp_mappings_menu.xml'
+    ],
+    'qweb': [
+        'static/src/xml/qweb_templates.xml',
+    ],
+    'application': True,
+    'installable': True,
+    'sequence': 0,
+}

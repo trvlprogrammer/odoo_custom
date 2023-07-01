@@ -1,0 +1,303 @@
+<odoo>
+  <record id="spx_vesco.part_statuses" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        This is your new action ; by default, it contains a list view and a form view.
+                    </p>
+                    <p>
+                        You can start customizing these screens by clicking on the Studio icon on the
+                        top right corner (you can also customize this help message there).
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Part Statuses</field>
+    <field name="res_model">spx_vesco.rpp_part_status</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  
+  
+    <record id="spx_vesco.rpp_colours" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Color Mapping</field>
+    <field name="res_model">spx_vesco.rpp_colour</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  
+  
+    <record id="spx_vesco.rpp_post_processing_action" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Post Processing Circle Formatting</field>
+    <field name="res_model">spx_vesco.rpp_post_processing</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  
+  
+  <record id="spx_vesco.payment_terms" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        This is your new action ; by default, it contains a list view and a form view.
+                    </p>
+                    <p>
+                        You can start customizing these screens by clicking on the Studio icon on the
+                        top right corner (you can also customize this help message there).
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Payment Terms</field>
+    <field name="res_model">spx_vesco.rpp_payment_terms</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  <record id="spx_vesco.produced_parts" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        This is your new action ; by default, it contains a list view and a form view.
+                    </p>
+                    <p>
+                        You can start customizing these screens by clicking on the Studio icon on the
+                        top right corner (you can also customize this help message there).
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Produced Parts</field>
+    <field name="res_model">stock.production.lot</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_ids" eval="[(6,0,0),
+              (0,0,{'view_mode':'tree'}),
+              (0,0,{'view_mode':'form', 'view_id': ref('stock.view_production_lot_form')})]"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  
+  <record id="spx_vesco.rpp_mappings" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        This is your new action ; by default, it contains a list view and a form view.
+                    </p>
+                    <p>
+                        You can start customizing these screens by clicking on the Studio icon on the
+                        top right corner (you can also customize this help message there).
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Q3D</field>
+    <field name="res_model">spx_vesco.rpp_part_status</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  
+  
+  <record id="spx_vesco.rpp_product_mapping" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        This is your new action ; by default, it contains a list view and a form view.
+                    </p>
+                    <p>
+                        You can start customizing these screens by clicking on the Studio icon on the
+                        top right corner (you can also customize this help message there).
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">RPP Product Mapping</field>
+    <field name="res_model">spx_vesco.rpp_material</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+  
+  
+  <record id="spx_vesco.sales_people" model="ir.actions.act_window">
+    <field name="auto_search" eval="True"/>
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                        This is your new action ; by default, it contains a list view and a form view.
+                    </p>
+                    <p>
+                        You can start customizing these screens by clicking on the Studio icon on the
+                        top right corner (you can also customize this help message there).
+                    </p>
+                ]]></field>
+    <field name="limit">80</field>
+    <field name="multi" eval="False"/>
+    <field name="name">Sales Person Exceptions</field>
+    <field name="res_model">spx_vesco.rpp_salesperson</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="src_model" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+  </record>
+
+  <!-- <record id="spx_vesco.manufacturing_rpp_ma" model="ir.ui.menu">
+    <field name="action" ref="spx_vesco.rpp_mappings"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="parent_id" ref="mrp.menu_mrp_configuration"/>
+    <field name="sequence">100</field>    
+  </record>
+    
+  <record id="spx_vesco.menu_manufacturing_part_s" model="ir.ui.menu">
+    <field name="action" ref="spx_vesco.part_statuses"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Part Statuses</field>
+    <field name="parent_id" ref="spx_vesco.manufacturing_rpp_ma"/>
+    <field name="sequence">110</field>    
+  </record>
+  
+  <record id="spx_vesco.manufacturing_paymen" model="ir.ui.menu">
+    <field name="action" ref="spx_vesco.payment_terms"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Payment Terms</field>
+    <field name="parent_id" ref="spx_vesco.manufacturing_rpp_ma"/>
+    <field name="sequence">120</field>    
+  </record>  
+  
+  <record id="spx_vesco.manufacturing_sales_" model="ir.ui.menu">
+    <field name="action" ref="spx_vesco.sales_people"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Sales Person Exc.</field>
+    <field name="parent_id" ref="spx_vesco.manufacturing_rpp_ma"/>
+    <field name="sequence">130</field>    
+  </record>
+
+    <record id="spx_vesco.rpp_product_mapping_menu" model="ir.ui.menu">
+    <field name="action" ref="spx_vesco.rpp_product_mapping"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">RPP Product Mapping</field>
+    <field name="parent_id" ref="spx_vesco.manufacturing_rpp_ma"/>
+    <field name="sequence">140</field>    
+  </record>
+  
+  <record id="spx_vesco.menu_manufacturing_colors" model="ir.ui.menu">
+    <field name="action" ref="spx_vesco.rpp_colours"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">RPP Color Mapping</field>
+    <field name="parent_id" ref="spx_vesco.manufacturing_rpp_ma"/>
+    <field name="sequence">150</field>    
+  </record>
+  
+  
+  <record id="spx_vesco.menu_rpp_post_processing" model="ir.ui.menu">
+    <field name="action" ref="spx_vesco.rpp_post_processing_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">RPP Post Processing Circle</field>
+    <field name="parent_id" ref="spx_vesco.manufacturing_rpp_ma"/>
+    <field name="sequence">150</field>    
+  </record>
+   -->
+  <!--<menuitem id="machine_menu" name="Machines" parent="spx_vesco.manufacturing_rpp_ma" action="mrp_assembly_machine_action"/>  -->
+
+</odoo>

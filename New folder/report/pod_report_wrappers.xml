@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report
+        id="account.account_invoices"
+        model="account.invoice"
+        string="Invoice(s)"
+        name="account.report_invoice"
+        attachment_use="False"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        id="account_invoices_sleek"
+        model="account.invoice"
+        string="Invoice(s) Sleek"
+        name="spx_vesco.report_invoice_sleek"
+        attachment_use="False"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+
+    <report
+        id="account_invoices_mailing"
+        model="account.invoice"
+        string="Invoice(s) (Email)"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_invoice_mailing"
+        file="spx_vesco.report_invoice_mailing"
+        paperformat="spx_vesco.paperformat_our_a4"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice"
+    />
+    
+        <report
+        id="account_invoices_mailing_sleek"
+        model="account.invoice"
+        string="Invoice(s) (Email) Sleek"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_invoice_sleek_mailing"
+        file="spx_vesco.report_invoice_sleek_mailing"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice"
+    />
+
+    <report
+        id="sale.action_report_saleorder"
+        string="Quotation / Order"
+        model="sale.order"
+        name="sale.report_saleorder"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        id="action_report_saleorder_mailing"
+        string="Quotation / Order (Email)"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="spx_vesco.report_saleorder_mailing"
+        name="spx_vesco.report_saleorder_mailing"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+    
+    <report
+        id="action_report_saleorder_sleek"
+        string="Quotation / SO Sleek"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="spx_vesco.report_saleorder"
+        name="spx_vesco.report_saleorder_sleek"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+    
+    <report
+        id="action_report_saleorder_sleek_mailing"
+        string="Quotation / SO Sleek (Email)"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="spx_vesco.report_saleorder"
+        name="spx_vesco.report_saleorder_sleek_mailing"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+    
+        <report
+        string="PO Sleek"
+        id="purchase.action_report_purchase_order_sleek"
+        model="purchase.order"
+        name="spx_vesco.report_purchaseorder_sleek"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+    <report
+        id="action_report_purchase_order_sleek_mailing"
+        string="PO Sleek (Email)"
+        model="purchase.order"
+        report_type="qweb-pdf"
+        file="spx_vesco.report_purchaseorder_sleek_mailing"
+        name="spx_vesco.report_purchaseorder_sleek_mailing"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+    <report
+        string="Purchase Order"
+        id="purchase.action_report_purchase_order"
+        model="purchase.order"
+        name="purchase.report_purchaseorder"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        id="action_report_purchase_order_mailing"
+        string="Purchase Order (Email)"
+        model="purchase.order"
+        report_type="qweb-pdf"
+        file="spx_vesco.report_purchaseorder_mailing"
+        name="spx_vesco.report_purchaseorder_mailing"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        string="Request for Quotation"
+        id="report_purchase_quotation"
+        model="purchase.order"
+        name="purchase.report_purchasequotation"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        string="RFQ Sleek (Email)"
+        id="report_purchase_quotation_mailing"
+        model="purchase.order"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_purchasequotation_mailing"
+        file="spx_vesco.report_purchasequotation_mailing"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+    <report
+        id="stock.action_report_picking"
+        string="Picking Operations"
+        model="stock.picking"
+        name="stock.report_picking"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+    
+    <report
+        id="stock.action_report_picking_sleek"
+        string="Picking Sleek"
+        model="stock.picking"
+        name="spx_vesco.report_picking_sleek"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+    <report
+        id="action_report_picking_mailing"
+        string="Picking Operations (Email)"
+        model="stock.picking"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_picking_mailing"
+        file="spx_vesco.report_picking_mailing"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        id="action_report_picking_mailing_sleek"
+        string="Picking Sleek (Email)"
+        model="stock.picking"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_picking_sleek_mailing"
+        file="spx_vesco.report_picking_sleek_mailing"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+    <report
+        id="stock.action_report_delivery"
+        string="Delivery Slip"
+        model="stock.picking"
+        name="stock.report_deliveryslip"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+    
+    <report
+        id="stock.action_report_delivery_sleek"
+        string="Delivery Sleek"
+        model="stock.picking"
+        name="spx_vesco.report_deliverysleek"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+
+    <report
+        id="action_report_delivery_mailing"
+        string="Delivery Slip (Email)"
+        model="stock.picking"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_deliveryslip_mailing"
+        file="spx_vesco.report_deliveryslip_mailing"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        id="action_report_delivery_sleek_mailing"
+        string="Delivery Sleek (Email)"
+        model="stock.picking"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_deliverysleek_mailing"
+        file="spx_vesco.report_deliverysleek_mailing"
+        paperformat="spx_vesco.paperformat_sleek_a4"
+    />
+
+
+    <report
+        id="action_report_stock_picking_label"
+        model="stock.picking"
+        string="Box Label"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_stock_picking_label"
+        file="spx_vesco.report_stock_picking_label"
+        paperformat="spx_vesco.paperformat_box_label"
+    />
+
+    <report
+        id="action_report_part_label"
+        model="stock.production.lot"
+        string="Part Label"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_part_label"
+        file="spx_vesco.report_part_label"
+        paperformat="spx_vesco.paperformat_part_label"
+    />
+    
+    <report
+        id="action_report_partlog"
+        model="stock.production.lot"
+        string="Production Log"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_partlog"
+        file="spx_vesco.report_partlog"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+    
+    <report
+        id="action_report_partlog_mailing"
+        model="stock.production.lot"
+        string="Production Log (Email)"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_partlog_mailing"
+        file="spx_vesco.report_partlog_mailing"
+        paperformat="spx_vesco.paperformat_our_a4"
+    />
+
+    <report
+        id="action_report_lot_barcode_assembly"
+        model="stock.production.lot"
+        string="Lot BarCode (Assembly)"
+        report_type="qweb-pdf"
+        name="spx_vesco.report_lot_barcode_assembly"
+        file="spx_vesco.report_lot_barcode_assembly"
+        paperformat="spx_vesco.paperformat_lot_assembly"
+    />
+
+</odoo>

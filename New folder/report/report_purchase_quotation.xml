@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="purchase.report_purchasequotation">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="is_rfq" t-value="True"/>
+                <t t-call="spx_vesco.report_purchaseorder_sleek" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_purchasequotation_mailing">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-set="with_pagenum" t-value="True"/>
+                <t t-set="is_rfq" t-value="True"/>
+                <t t-call="spx_vesco.report_purchaseorder_sleek" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

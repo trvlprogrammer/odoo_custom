@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_stock_picking_label">
+    <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="o">
+            <div class="page">
+                <div>
+                    <div class="row">
+                        <div class="col-12">
+                            <img class="img d-block mx-auto" t-att-src="image_data_uri(res_company.logo)" style="max-height:50mm;" alt="Logo"/>
+                        </div>
+                    </div>
+                    <div class="row mt16">
+                        <div class="col-12 text-center">
+                            <div class="d-inline-block text-left" style="font-size:20pt;">
+                                HERE THEY ARE.<br/>
+                                YOUR PARTS.<br/>
+                                ON DEMAND.<br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" style="font-size:20px;">
+                <div class="row mb16">
+                    <div class="col-12">
+                        <address>
+                            <div t-esc="o.partner_id"
+                                 t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True}'/>
+                        </address>
+                    </div>
+                </div>
+                <div class="row mb16">
+                    <div class="col-12 text-center">
+                        Your reference: <span t-field="o.sale_id.client_order_ref"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.origin, 600, 100)" style="width:100%;height:50px;" alt="Barcode"/>
+                </div>
+                <div class="row mt16">
+                    <div class="col-12 text-center">
+                        <span t-field="o.origin"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

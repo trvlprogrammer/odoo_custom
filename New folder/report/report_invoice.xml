@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_invoice_document" inherit_id="account.report_invoice_document">
+	<xpath expr="//div[hasclass('page')]" position="attributes">
+		<attribute name="style">font-family:Poppins,Roboto,Helvetica;</attribute>
+	</xpath>
+	<xpath expr="//table[@name='invoice_line_table']/thead" position="attributes">
+		<attribute name="style">background-color: black; color: white;</attribute>
+	</xpath>
+	<xpath expr="//table[@name='invoice_line_table']/thead/tr[1]/th[1]" position="after">
+		<th class="text-left"><span>Image</span></th>
+	</xpath>
+	<xpath expr="//td[@name='account_invoice_line_name']" position="after">
+		<td>
+			<img t-if="line.sale_line_ids.image_filename" t-att-src="line.sale_line_ids[0].image_url" style="max-width: 90px; max-height: 90px;"/>
+		</td>
+	</xpath>
+	<xpath expr="//p[@name='comment']" position="before">
+		<p style="font-size: 14px;">
+			<span>
+				Wij danken je hartelijk voor het in ons gestelde vertrouwen, en zijn je in de toekomst graag nogmaals van dienst.<br/><br/>
+				Al onze leveringen en diensten worden uitgevoerd onder onze algemene voorwaarden. Deze zijn gedeponeerd bij de Kamer van Koophandel en te raadplegen via https://partsondemand.eu/voorwaarden. Tevens worden deze voorwaarden je op verzoek toegestuurd.<br/><br/>
+				Alle goederen en resultaten blijven eigendom van VESCO Group B.V. tot de volledige betaling ontvangen is. Je reclamaties ontvangen we graag schriftelijk binnen acht (8) dagen. Bij niet tijdige betalingen behouden wij ons het recht 12,5% financieringsrente en herinneringskosten in rekening te brengen.
+			</span>
+		</p>
+	</xpath>
+	<xpath expr="//p[@name='comment']" position="inside">
+		<strong>Comment:</strong>
+	</xpath>
+	<xpath expr="//p[@name='note']" position="inside">
+		<strong>Fiscal Position Remark:</strong>
+	</xpath>
+	<xpath expr="//p[@name='note']" position="after">
+		<table style="page-break-inside: avoid;">
+			<tr>
+				<td>Gelieve te vermelden:</td>
+				<td class="pl-3"><b><span t-field="o.number"/></b></td>
+			</tr>
+			<tr>
+				<td>Te voldoen voor:</td>
+				<td class="pl-3"><b><span t-field="o.date_due"/></b></td>
+			</tr>
+			<tr>
+				<td>IBAN:</td>
+				<td class="pl-3">NL68 RABO 0192 0990 86</td>
+			</tr>
+			<tr>
+				<td>BIC:</td>
+				<td class="pl-3">RABONL2U</td>
+			</tr>
+			<tr>
+				<td>Ten name van:</td>
+				<td class="pl-3">Parts on Demand B.V.</td>
+			</tr>
+		</table>
+	</xpath>
+</template>
+
+<template id="report_invoice_mailing">
+	<t t-call="web.html_container">
+		<t t-foreach="docs" t-as="o">
+			<t t-set="with_images" t-value="True"/>
+			<t t-set="lang" t-value="o.sudo().user_id.lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+			<t t-call="account.report_invoice_document" t-lang="lang"/>
+		</t>
+	</t>
+</template>
+
+</odoo>
+

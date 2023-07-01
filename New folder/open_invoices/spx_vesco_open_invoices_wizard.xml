@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="open_invoices_tree" model="ir.ui.view">
+	    <field name="name">vesco : open_invoices.tree</field>
+	    <field name="model">account.invoice</field>
+	    <field name="arch" type="xml">
+		<tree decoration-info="paid_by_date > 0" >		
+		    <field name="partner_id" groups="base.group_user" string="Customer"/>
+		    <field name="date_invoice"/>
+		    <field name="number"/>
+		    <field name="commercial_partner_id" invisible="1"/>
+		    <field name="reference" invisible="1"/>
+		    <field name="name" invisible="1"/>
+		    <field name="journal_id" invisible="1"/>
+		    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+		    <field name="user_id"/>
+		    <field name="date_due"/>
+		    <field name="origin"/>
+		    <field name="amount_total_signed" string="Total" sum="Total"/>
+		    <field name="paid_by_date" sum="Partially Paid"/>
+		    <field name="currency_id" invisible="1"/>
+		    <field name="state" invisible="1"/>
+		    <field name="amount_total" invisible="1"/>
+		    <field name="company_currency_id" invisible="1"/>
+		    <field name="type" invisible="context.get('type',True)"/>
+		</tree>
+	    </field>
+	</record>
+
+
+        <record id="open_invoices_view" model="ir.ui.view">
+            <field name="name">wizard @ spx_vesco.open_invoices</field>
+            <field name="model">spx_vesco.open_invoices</field>
+            <field name="arch" type="xml">
+               <form string="Customer Statement">
+                    <group>
+                        <group>
+                            <field name="to_date"/>
+                        </group>
+                    </group>
+                    <footer>
+			<button string="Customer Invoices" name="customer_invoices" type="object" class="oe_highlight"/>
+		        	 or
+			<button string="Vendor Bills" name="vendor_bills" type="object" class="oe_highlight"/>
+    				 
+			<button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+                </form>
+            </field>
+        </record>
+	
+        <act_window name="Open Invoices by Date"
+                res_model="spx_vesco.open_invoices"
+                src_model="account.invoice"
+                view_mode="form"
+                view_type="form"
+                multi="False"
+                target="new"
+                key2="client_print_multi"
+                id="action_open_invoices"/>
+		
+		
+	<menuitem parent="account.menu_finance_entries" id="menu_open_invoices_by_date" action="action_open_invoices" sequence="101" groups="account.group_account_user"/>
+
+</odoo>
+

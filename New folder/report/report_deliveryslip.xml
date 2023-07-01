@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="stock.report_deliveryslip">
+        <t t-call="stock.report_picking"/>
+    </template>    
+    
+    <template id="report_deliverysleek">
+        <t t-call="spx_vesco.report_picking_sleek"/>
+    </template>    
+
+    
+    <template id="report_deliveryslip_mailing">
+        <t t-set="with_images" t-value="True"/>
+        <t t-call="stock.report_picking"/>
+    </template>
+    
+        <template id="report_deliverysleek_mailing">
+        <t t-set="with_pagenum" t-value="True"/>
+        <t t-call="spx_vesco.report_picking_sleek"/>
+    </template>
+</odoo>

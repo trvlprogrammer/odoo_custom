@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record id="spx_vesco.rpp_material_tree" model="ir.ui.view">
+    <field name="arch" type="xml">
+        <tree string="RPP Material -&gt; Product Mapping">
+          <field name="name"/>
+          <field name="rpp_mapped_product"/>
+          <field name="rpp_delivered_product"/>
+        </tree>
+    </field>
+    <field name="model">spx_vesco.rpp_material</field>
+    <field name="name">Odoo Studio: Default tree view for spx_vesco.rpp_material customization</field>
+  </record>
+  
+  <record id="spx_vesco.rpp_material_form" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="RPP Material -&gt; Product Mapping">
+          <group col="4">
+            <field name="name"/>
+            <field name="rpp_mapped_product" />
+            <field name="rpp_delivered_product" />
+            <separator/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="model">spx_vesco.rpp_material</field>
+    <field name="name">Default form view for spx_vesco.rpp_material</field>
+  </record>
+
+  <record id="spx_vesco.rpp_salesperson_tree" model="ir.ui.view">
+    <field name="arch" type="xml">
+        <tree string="RPP Salesperson -&gt; Salesperson Mapping">
+          <field name="name"/>
+          <field name="rpp_mapped_user"/>
+        </tree>
+    </field>
+    <field name="model">spx_vesco.rpp_salesperson</field>
+    <field name="name">Odoo Studio: Default tree view for spx_vesco.rpp_salesperson customization</field>
+  </record>
+  
+  <record id="spx_vesco.rpp_salesperson_form" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="RPP Salesperson -&gt; Salesperson Mapping">
+          <group col="4">
+            <field name="name"/>
+            <field name="rpp_mapped_user" can_create="true" can_write="true"/>
+            <separator/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="model">spx_vesco.rpp_salesperson</field>
+    <field name="name">Default form view for spx_vesco.rpp_salesperson</field>
+  </record>
+  
+  <record id="spx_vesco.rpp_payment_terms_tree_view_fo" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <tree string="RPP Payment Method -&gt; Payment Terms Mapping">
+        <field name="rpp_payment_method"/>
+        <field name="invoice_ordered"/>
+        <field name="payment_term_id"/>
+      </tree>
+    </field>
+    <field name="model">spx_vesco.rpp_payment_terms</field>
+    <field name="name">Default tree view for spx_vesco.rpp_payment_terms</field>
+  </record>
+
+  <record id="spx_vesco.rpp_payment_terms_form_view_fo" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="RPP Payment Method -&gt; Payment Terms Mapping">
+          <group col="4">
+            <field name="rpp_payment_method"/>
+            <field name="invoice_ordered"/>
+            <field name="payment_term_id" can_create="true" can_write="true"/>
+            <separator/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="model">spx_vesco.rpp_payment_terms</field>
+    <field name="name">Default form view for spx_vesco.rpp_payment_terms</field>
+  </record>
+
+  <record id="spx_vesco.rpp_part_status_form_view_fo" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="RPP Part Status -&gt; Production Step Mapping">
+          <group col="4">
+            <field name="rpp_part_status"/>
+            <field name="stage_id" can_create="false" can_write="false"/>
+            <separator/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="model">spx_vesco.rpp_part_status</field>
+    <field name="name">Default form view for spx_vesco.rpp_part_status</field>
+    <field name="type">form</field>
+  </record>
+ 
+ 
+  <record id="spx_vesco.part_log_tree_view_fo" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <tree string="Production Log">
+          <!--<field name="sale_id"/>-->
+          <field name="lot_id"/>
+          <field name="stage_id"/>
+          <field name="responsible"/>
+          <field name="date_start"/>
+      </tree>
+    </field>
+    <field name="model">q3d.step</field>
+    <field name="name">Default tree view for q3d.step</field>
+    <field name="type">tree</field>
+  </record>
+
+  <record id="spx_vesco.part_log_form_view_fo" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Production Log">
+          <group col="4">
+            <field name="lot_id" on_change="1" can_create="true" can_write="true"/>
+            <!--<field name="sale_id" can_create="true" can_write="true" modifiers="{&quot;readonly&quot;: true}"/>-->
+            <field name="stage_id" on_change="1" can_create="true" can_write="true"/>
+            <field name="responsible"/>
+            <field name="date_start"/>
+            <separator/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="model">q3d.step</field>
+    <field name="name">Default form view for q3d.step</field>
+    <field name="type">form</field>
+  </record>
+  
+  
+  <record id="spx_vesco.rpp_colour_form" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="RPP Color Mapping">
+          <group col="4">
+            <field name="rpp_colour"/>
+            <field name="fill_colour" widget="color"/>
+            <field name="border_colour" widget="color"/>
+            <field name="text_colour" widget="color"/>            
+            <field name="font_size"/>
+            <field name="color_code"/>
+            <separator/>
+          </group>
+        </sheet>
+      </form>
+    </field>          
+    <field name="model">spx_vesco.rpp_colour</field>
+    <field name="name">Default form view for spx_vesco.rpp_colour</field>
+  </record>
+
+
+  <record id="spx_vesco.rpp_post_processing_form" model="ir.ui.view">
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="RPP Color Mapping">
+          <group col="4">
+            <field name="rpp_post_processing"/>
+            <field name="fill_color" widget="color"/>
+            <field name="border_color" widget="color"/>
+            <field name="text_color" widget="color"/>            
+            <field name="font_size"/>
+            <field name="color_code"/>
+            <separator/>
+          </group>
+        </sheet>
+      </form>
+    </field>          
+    <field name="model">spx_vesco.rpp_post_processing</field>
+    <field name="name">Default form view for spx_vesco.rpp_post_processing</field>
+  </record>
+  
+</odoo>

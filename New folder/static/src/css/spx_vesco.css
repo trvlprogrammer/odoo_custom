@@ -1,0 +1,50 @@
+body {
+    font-size: 15px;
+}
+
+#informations strong, #ref strong {
+    color: #2a62a9;
+}
+
+.table-sm th {
+    padding: 5px;
+}
+
+.table-sm td {
+    padding: 10px;
+}
+
+.table-total td {
+    padding: 2px;
+}
+
+.border-blue td {
+    border-bottom: 1px solid #2a62a9 !important;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url('../fonts/Poppins/Poppins-Regular.otf');
+    font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url('../fonts/Poppins/Poppins-Italic.otf');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: "Poppins";
+	src: url('../fonts/Poppins/Poppins-Italic.otf');
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face {
+    font-family: "Poppins";
+    src: url('../fonts/Poppins/Poppins-SemiBold.otf');
+    font-weight: bold;
+	font-style: normal;
+}

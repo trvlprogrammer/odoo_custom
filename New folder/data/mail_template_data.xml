@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+<function name="write" model="ir.model.data">
+    <function name="search" model="ir.model.data">
+        <value eval="[('module', '=', 'account'), ('name', '=', 'email_template_edi_invoice')]"/>
+    </function>
+    <value eval="{'noupdate': False}" />
+</function>
+<record id="account.email_template_edi_invoice" model="mail.template">
+    <field name="report_template" ref="spx_vesco.account_invoices_mailing"/>
+</record>
+
+<function name="write" model="ir.model.data">
+    <function name="search" model="ir.model.data">
+        <value eval="[('module', '=', 'sale'), ('name', '=', 'email_template_edi_sale')]"/>
+    </function>
+    <value eval="{'noupdate': False}" />
+</function>
+<record id="sale.email_template_edi_sale" model="mail.template">
+    <field name="report_template" ref="spx_vesco.action_report_saleorder_mailing"/>
+</record>
+
+<function name="write" model="ir.model.data">
+    <function name="search" model="ir.model.data">
+        <value eval="[('module', '=', 'purchase'), ('name', '=', 'email_template_edi_purchase_done')]"/>
+    </function>
+    <value eval="{'noupdate': False}" />
+</function>
+<record id="purchase.email_template_edi_purchase_done" model="mail.template">
+    <field name="report_template" ref="spx_vesco.action_report_purchase_order_mailing"/>
+</record>
+
+<function name="write" model="ir.model.data">
+    <function name="search" model="ir.model.data">
+        <value eval="[('module', '=', 'purchase'), ('name', '=', 'email_template_edi_purchase')]"/>
+    </function>
+    <value eval="{'noupdate': False}" />
+</function>
+<record id="purchase.email_template_edi_purchase" model="mail.template">
+    <field name="report_template" ref="spx_vesco.report_purchase_quotation_mailing"/>
+</record>
+
+<record id="email_template_picking" model="mail.template">
+    <field name="name">Stock Picking - Send by Email</field>
+    <field name="email_from"><![CDATA["${object.company_id.name|safe}" <${(object.company_id.email or user.email)|safe}>]]></field>
+    <field name="subject">${object.company_id.name} Delivery (Ref ${object.name or 'n/a' })</field>
+    <field name="partner_to">${object.partner_id.id}</field>
+    <field name="model_id" ref="stock.model_stock_picking"/>
+    <field name="auto_delete" eval="True"/>
+    <field name="report_template" ref="spx_vesco.action_report_delivery_mailing"/>
+    <field name="report_name">Delivery_${(object.name or '').replace('/','_')}</field>
+    <field name="lang">${object.partner_id.lang}</field>
+    <field name="body_html"><![CDATA[
+    % if (object.carrier_id.id == 7) :
+    <p> Dear ${object.partner_id.name}, </p>
+
+<p> We hope this message finds you in good spirits and high anticipation. We are delighted to announce that your expertly designed and precision-crafted 3D-printed order has just been completed by our cutting-edge industrial 3D printers!</p>
+
+<p> Our factory has been abuzz with excitement, as the sight of your creations inspired admiration and respect from our skilled team. </p>
+
+<p> We are pleased to inform you that your order is now ready for pick-up at our factory during our regular opening hours. Please be our guest and grace us with your presence at the following times: </p>
+
+<p> Monday - Friday: 8:30 AM to 5:00 PM </p>
+
+<p> Do not let these fine specimens of 3D-printed ingenuity languish in our workshop any longer. We eagerly await your arrival </p>
+	  
+    % else
+<strong style="font-size:24px;">Watch out - Incoming!</strong>
+<p>Hi ${object.partner_id.name},</p>
+<p>We have awesome news for you! Your order
+% if object.sale_id:
+% if object.sale_id.client_order_ref:
+${object.sale_id.client_order_ref}
+% endif
+(${object.company_id.name} order ${object.sale_id.name})
+% endif
+is now ready for shipping and should be with you
+% if object.sale_id.commitment_date and object.sale_id.commitment_date > datetime.datetime.now():
+${object.sale_id.commitment_date.date()}.
+% else
+tomorrow.
+% endif
+</p>
+<p>
+Attached you will find our delivery note (Ref. ${object.name}).
+Want to know where your shipment’s currently at? Easy! Just hit the button:
+</p>
+<br/>
+<center>
+    % set track_url = 'http://wwwapps.ups.com/WebTracking/track?track=yes&trackNums=%s' % object.ups_shipment_number
+    <a href="${track_url}" style="background-color: #144189; padding: 15px; text-decoration: none; text-weight: bold; color: #fff; border-radius: 5px; font-size: 22px;" class="o_default_snippet_text">Where is my box?</a>
+</center>
+<br/>
+
+% endif  
+]]></field>
+</record>
+
+<record id="spx_vesco.mail_template_data_notification_email_stock_picking" model="mail.template">
+    <field name="name">Stock Picking Notification Email</field>
+    <field name="subject">${object.subject}</field>
+    <field name="model_id" ref="mail.model_mail_message"/>
+    <field name="auto_delete" eval="True"/>
+    <field name="body_html"><![CDATA[<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0 auto; font-family:'Poppins',Arial,Helvetica,sans-serif; font-size:18px;">
+<table border="0" width="100%" cellpadding="0" style="padding: 20px;" summary="o_mail_notification">
+    <tbody>
+      <!-- HEADER -->
+      <tr><td align="center"><img src="spx_vesco/static/src/img/pod_email_template_header.jpg"/></td></tr>
+      <!-- CONTENT -->
+      <tr style="background-color:;text-color:#8F95A3;">
+        <td align="center" style="min-width: 590px;">
+          <table width="768" border="0" cellpadding="0" bgcolor="#ffffff" style="background-color:#E4E6F1;color:#8F95A3;padding:20px;border-collapse:separate;">
+            <tbody>
+              <td valign="top" style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;">
+                ${object.body | safe}
+              </td>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <!-- FOOTER -->
+      <tr style="text-color:#828282;">
+      <td align="center" style="min-width: 768px;">
+      <div style="width:768px;height:150px;font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;">
+        <div style="width:50%;float:left;text-align:left;">
+            <div style="height:30%">
+                <img src="spx_vesco/static/src/img/pod_email_template_logo.jpg"/>
+            </div>
+            <div style="padding:10px 0px;">
+            Kvk: 61579416<br/>
+            Btw: NL854400047B01
+            </div>
+            <div style="height:30%">
+                <img src="spx_vesco/static/src/img/pod_email_template_ISO_9001.jpg"/>
+            </div>
+        </div>
+        <div style="width:50%;float:left;text-align:right;">
+            <p>
+                <b style="color:#4C4C4C;">CONTACT</b><br/><br/>
+                Schaverijstraat 9D<br/>
+                3534 AS Utrecht<br/>
+                +31 85 - 444 42 00<br/>
+                <a href="mailto:info@partsondemand.eu" style="text-decoration:none;color:#8F95A3;">info@partsondemand.eu</a><br/>
+                <a href="https://partsondemand.eu/" style="text-decoration:none;color:#8F95A3;">partsondemand.eu</a><br/>
+            </p>
+        </div>
+      </div>
+      </td>
+      </tr>
+    </tbody>
+</table>
+</body>
+</html>
+]]></field>
+</record>
+
+
+<template id="mail_template_header_footer">
+<table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; 'Poppins',Arial,Helvetica,sans-serif; font-size:18px; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+<tbody>
+    <!-- HEADER -->
+    <tr><td align="center"><img src="spx_vesco/static/src/img/pod_email_template_header.jpg"/></td></tr>
+    <!-- CONTENT -->
+      <tr style="background-color:;text-color:#8F95A3;">
+        <td align="center" style="min-width: 590px;">
+          <table width="768" border="0" cellpadding="0" bgcolor="#ffffff" style="background-color:#E4E6F1;color:#8F95A3;padding:20px;border-collapse:separate;">
+            <tbody>
+              <td valign="top" style="font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;">
+                <t t-raw="message.body"/>
+              </td>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    <tr>
+    </tr>
+    <!-- FOOTER -->
+    <tr style="text-color:#828282;">
+      <td align="center" style="min-width: 768px;">
+      <div style="width:768px;height:150px;font-family:'Poppins',Arial,Helvetica,sans-serif;font-size:18px;">
+        <div style="width:50%;float:left;text-align:left;">
+            <div style="height:30%">
+                <img src="spx_vesco/static/src/img/pod_email_template_logo.jpg"/>
+            </div>
+            <div style="padding:10px 0px;">
+            Kvk: 61579416<br/>
+            Btw: NL854400047B01
+            </div>
+            <div style="height:30%">
+                <img src="spx_vesco/static/src/img/pod_email_template_ISO_9001.jpg"/>
+            </div>
+        </div>
+        <div style="width:50%;float:left;text-align:right;">
+            <p>
+                <b style="color:#4C4C4C;">CONTACT</b><br/><br/>
+                Schaverijstraat 9D<br/>
+                3534 AS Utrecht<br/>
+                +31 85 - 444 42 00<br/>
+                <a href="mailto:info@partsondemand.eu" style="text-decoration:none;color:#8F95A3;">info@partsondemand.eu</a><br/>
+                <a href="https://partsondemand.eu/" style="text-decoration:none;color:#8F95A3;">partsondemand.eu</a><br/>
+            </p>
+        </div>
+      </div>
+      </td>
+      </tr>
+</tbody>
+</table>
+</td></tr>
+<!-- POWERED BY -->
+<tr><td align="center" style="min-width: 590px;">
+        Powered by <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=email" style="color: #875A7B;">Odoo</a>
+</td></tr>
+</table>
+        </template>
+
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_spx_vesco_rpp_part_status,spx_vesco_rpp_part_status,model_spx_vesco_rpp_part_status,base.group_user,1,1,1,1
+access_spx_vesco_rpp_payment_terms,spx_vesco_rpp_payment_terms,model_spx_vesco_rpp_payment_terms,base.group_user,1,1,1,1
+access_spx_vesco_rpp_salesperson,spx_vesco_rpp_salesperson,model_spx_vesco_rpp_salesperson,base.group_user,1,1,1,1
+access_spx_vesco_rpp_material,access_spx_vesco_rpp_material,model_spx_vesco_rpp_material,base.group_user,1,1,1,1 
+access_spx_vesco_rpp_colour,access_spx_vesco_rpp_colour,model_spx_vesco_rpp_colour,base.group_user,1,1,1,1
+access_spx_vesco_rpp_post_processing,access_spx_vesco_rpp_post_processing,model_spx_vesco_rpp_post_processing,base.group_user,1,1,1,1

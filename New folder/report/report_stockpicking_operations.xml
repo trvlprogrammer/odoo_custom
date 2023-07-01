@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_picking" inherit_id="stock.report_picking">
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute name="style">font-family:Poppins,Roboto,Helvetica;</attribute>
+        </xpath>
+        <xpath expr="//table[1]/thead" position="attributes">
+            <attribute name="style">background-color: black; color: white;</attribute>
+        </xpath>
+        <xpath expr="//table[2]/thead" position="attributes">
+            <attribute name="style">background-color: black; color: white;</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('row')][2]" position="replace">
+            <div class="row">
+                <div class="col-6">
+                    <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                        <span><strong>Vendor Address:</strong></span>
+                    </div>
+                    <div t-if="o.picking_type_id.code=='internal' and o.partner_id">
+                        <span><strong>Warehouse Address:</strong></span>
+                    </div>
+                    <div t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
+                        <span><strong>Customer Address:</strong></span>
+                    </div>
+                    <div t-if="o.partner_id" name="partner_header">
+                        <div t-field="o.partner_id"
+                           t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                        <p t-if="o.sudo().partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.sudo().partner_id.vat"/></p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div t-if="o.move_ids_without_package and o.move_ids_without_package[0].partner_id and o.move_ids_without_package[0].partner_id.id != o.partner_id.id">
+                        <span><strong>Delivery Address:</strong></span>
+                        <div t-field="o.move_ids_without_package[0].partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </div>
+                    <div t-if="o.picking_type_id.code != 'internal' and (not o.move_ids_without_package or not o.move_ids_without_package[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
+                        <span><strong>Warehouse Address:</strong></span>
+                        <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'/>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[@name='right_box']/.." position="replace"/>
+        <xpath expr="//h1[@t-field='o.name']" position="replace">
+            <div class="row">
+                <div class="col-8">
+                    <h1 class="mt0 float-left">Shipment <span t-field="o.name"/></h1>
+                </div>
+                <div class="col-4" name="right_box">
+                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/>
+                </div>
+            </div>
+        </xpath>
+        <!-- Hide Status Value -->
+        <xpath expr="//table[1]/thead/tr/th[2]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//table[1]/tbody/tr/td[2]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//th[@name='td_sched_date_h']" position="before">
+            <th t-if="o.sudo().sale_id.client_order_ref"><strong>Your PO#</strong></th>
+            <th><strong>Commitment Date</strong></th>
+        </xpath>
+        <xpath expr="//td[@name='td_sched_date']" position="before">
+            <td t-if="o.sudo().sale_id.client_order_ref">
+                <span t-field="o.sudo().sale_id.client_order_ref"/>
+            </td>
+            <td>
+                <span t-field="o.date"/>
+            </td>
+        </xpath>
+        <xpath expr="//table[last()]" position="after">
+            <p t-if="'ups_shipment_number' in o and o.ups_shipment_number">
+                <strong>UPS Tracking ID:</strong>
+                <span t-field="o.ups_shipment_number"/>
+            </p>
+        </xpath>
+        <!-- Hide From column-->
+        <xpath expr="//table[2]/thead/tr/th[3]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//table[2]/tbody/t/t/tr/td[3]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <!-- Hide To column-->
+        <xpath expr="//table[2]/thead/tr/th[3]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//table[2]/tbody/t/t/tr/td[3]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+        <xpath expr="//table[2]/thead/tr/th[2]" position="replace">
+            <th><strong>Image</strong></th>
+            <th class="text-right"><strong>Ordered Quantity</strong></th>
+            <th class="text-right"><strong>Delivered Quantity</strong></th>
+        </xpath>
+        <xpath expr="//table[2]/tbody/t/t/tr/td[2]" position="replace">
+            <td>
+                <t t-if="move.sale_line_id">
+                    <img t-if="move.sale_line_id.image_filename" t-att-src="move.sale_line_id.image_url" style="max-width: 90px; max-height: 90px;"/>
+                </t>
+            </td>
+            <td class="text-right">
+                <span t-if="ml.lot_id" t-field="ml.lot_id.ordered_qty"/>
+                <span t-field="ml.product_uom_id" groups="uom.group_uom"/>
+            </td>
+            <td class="text-right">
+                <span t-field="ml.qty_done"/>
+                <t t-if="o.state != 'done'">
+                    /<span t-field="ml.product_uom_qty"/>
+                </t>
+            </td>
+        </xpath>
+        <span t-field="ml.product_id.display_name" position="replace">
+            <span t-if="move.sale_line_id.name" t-field="move.sale_line_id.name"/>
+            <span t-else="" t-field="ml.product_id.display_name"/>
+        </span>
+    </template>
+
+    <template id="report_picking_mailing">
+        <t t-set="with_images" t-value="True"/>
+        <t t-call="stock.report_picking"/>
+    </template>
+    
+    <template id="report_picking_sleek_mailing">
+        <t t-set="with_pagenum" t-value="True"/>
+        <t t-call="spx_vesco.report_picking_sleek"/>
+    </template>
+
+</odoo>

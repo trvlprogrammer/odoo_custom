@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+	<xpath expr="//div[hasclass('page')]" position="attributes">
+		<attribute name="style">font-family:Poppins,Roboto,Helvetica;</attribute>
+	</xpath>
+	<xpath expr="//table[hasclass('o_main_table')]/thead" position="attributes">
+		<attribute name="style">background-color:#2a62a9; color: white;</attribute>
+	</xpath>
+	<xpath expr="//table[hasclass('o_main_table')]/thead/tr[1]/th[1]" position="after">
+		<th class="text-left"><span>Image</span></th>
+	</xpath>
+	<xpath expr="//t[@t-if='not line.display_type']/td[1]" position="after">
+		<td>
+			<img t-if="line.image_filename" t-att-src="line.image_url" style="max-width: 90px; max-height: 90px;"/>
+		</td>
+	</xpath>
+		
+	<xpath expr="//div[@id='informations']" position="replace">
+	    <div class="row mt32 mb32" id="informations">
+		<div t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
+		    <strong>Your Reference:</strong>
+		    <p class="m-0" t-field="doc.client_order_ref"/>
+		</div>
+		<div class="col-auto mw-100 mb-2">
+		    <strong>Delivery (planned):</strong>
+		    <p class="m-0" t-field="doc.commitment_date" t-options="{'widget': 'date'}"/>
+		</div>
+		<div t-if="doc.confirmation_date and doc.state not in ['draft','sent']" class="col-auto mw-100 mb-2">
+		    <strong>Date Ordered:</strong>
+		    <p class="m-0" t-field="doc.confirmation_date"/>
+		</div>
+		<div t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto mw-100 mb-2">
+		    <strong>Quotation Date:</strong>
+		    <p class="m-0" t-field="doc.date_order"/>		    
+		</div>
+		<div t-if="doc.sudo().user_id.name" class="col-auto mw-100 mb-2">
+		    <strong>Salesperson:</strong>
+		    <p class="m-0" t-field="doc.sudo().user_id"/>
+		</div>
+		<div name="payment_term" t-if="doc.sudo().payment_term_id" class="col-auto mw-100 mb-2">
+		    <strong>Payment&amp;nbsp;Terms:</strong>
+		    <p class="m-0" t-field="doc.sudo().payment_term_id"/>
+		</div>
+		<div t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto mw-100 mb-2">
+		    <strong>Expiration Date:</strong>
+		    <p class="m-0" t-field="doc.validity_date"/>
+		</div>
+	    </div>
+	</xpath>
+	
+		
+	
+	<xpath expr="//div[@name='signature']" position="after">
+		<div style="font-size:12px;">
+			<strong>Voordat we aan de slag gaan met je onderdelen, wijzen we je graag op het volgende:</strong>
+			<ul style="padding:20px;">
+				<li>De accuraatheid van de door Parts on Demand geleverde onderdelen is sterk afhankelijk van de kwaliteit van het aangeleverde bestand. Als klant heb jij de verantwoordelijkheid om een kwalitatief en juist 3D-bestand aan te leveren. Bestandsreparaties en aanpassingen die wij uitvoeren ten behoeve van de printbaarheid zijn voor risico van de klant en kunnen in rekening worden gebracht.</li>
+				<li>Daarnaast is het jouw verantwoordelijkheid de bij de technologie en materiaal behorende toleranties in acht te nemen en waar nodig je modellen hierop aan te passen.</li>
+				<li>Bij het in opdracht geven van productie verklaar je op de hoogte te zijn van de materiaaleigenschappen van het gekozen materiaal en de impact van eventuele nabewerkingen.</li>
+				<li>Al onze leveringen en diensten worden uitgevoerd onder onze algemene voorwaarden. Je kunt deze rustig doornemen op partsondemand.eu/voorwaarden. Als je ze liever op papier leest, sturen we je graag een kopie toe. Door het plaatsen van een order verklaar je dat je op de hoogte bent van deze voorwaarden en ermee akkoord gaat.</li>
+			</ul>
+		</div>
+	</xpath>
+</template>
+
+
+
+<template id="report_saleorder_mailing">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+			<t t-set="with_images" t-value="True"/>
+            <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
+        </t>
+    </t>
+</template>
+
+</odoo>
+

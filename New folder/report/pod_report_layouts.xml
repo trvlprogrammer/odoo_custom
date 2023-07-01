@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_common" name="spx_vesco pdf assets" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <link rel='stylesheet' href="/spx_vesco/static/src/css/spx_vesco.css"/>
+        </xpath>
+    </template>
+
+
+    <template id="_assets_secondary_variables" name="FixVariables" inherit_id="web._assets_secondary_variables" priority="15">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/spx_vesco/static/src/scss/fix_variables.scss"/>
+        </xpath>
+    </template>
+
+    <template id="web.address_layout">
+        <t t-set="colclass" t-value="('col-md-5' if report_type == 'html' else 'col-5')"/>
+        <t t-set="podclass" t-value="('col-md-2' if report_type == 'html' else 'col-2') + ' offset-5'"/>
+        <t t-if="address">
+            <div class="address row">
+                <t t-if="information_block">
+                    <t t-set="colclass" t-value="'col-5'"/>
+                    <t t-set="podclass" t-value="'col-2'"/>
+                    <div name="information_block" class="col-5">
+                        <t t-raw="information_block"/>
+                    </div>
+                </t>
+                <div name="address" t-att-class="colclass">
+                    <t t-raw="address"/>
+                </div>
+                <div t-att-class="podclass">
+                    <div class="pull-right pr-2" style="font-size:14px; text-align: right; margin-right:25px;">
+                        Parts On Demand B.V.<br/>
+                        Schaverijstraat 9D<br/>
+                        3534 AS Utrecht<br/>
+                        The Netherlands<br/><br/>
+                        (+31)(0) 85 4444 200<br/>
+                        https://partsondemand.eu<br/>
+                        info@partsondemand.eu
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="external_layout_standard" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[hasclass('header')]" position="replace">
+            <div class="header">
+                <div t-attf-class="{{'row' if report_type == 'html' or with_images else 'd-none' }}">
+                    <img src="/spx_vesco/static/vesco.png" style="width:100%;"/>
+                </div>                        
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('footer')]" position="replace">
+            <div class="footer o_standard_footer" style="height:80px;padding-top:42px;">
+                <div t-attf-class="{{'row text-white' if report_type == 'html' or with_pagenum else 'd-none' }}" style="font-size:14px;">
+                    <div class="col-12" style="height:35px;">
+                        <div class="pull-left">
+                            
+                        </div>
+                        <div t-if="report_type == 'pdf'" class="pull-right" style="margin-right: 25px">
+                            <span class="page"/>/<span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div t-attf-class="{{'row text-white' if report_type == 'html' or with_images else 'd-none' }}" style="background-color:#2a62a9;font-size:14px;">
+                    <div class="col-12 pt8" style="height:35px;">
+                        <div class="pull-left">
+                                ® Parts on Demand is a registered and protected trademark &amp;bull; KvK: 61579416 &amp;bull; BTW: <span t-field="company.vat"/> &amp;bull;
+                        </div>
+                          <div t-if="report_type == 'pdf'" class="pull-right" style="margin-right: 25px">
+                            Pagina: <span class="page"/> / <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div t-attf-class="{{'row text-black' if with_blknum else 'd-none' }}" style="font-size:14px;">
+                    <div class="col-12 pt8" style="height:35px;">
+                        <div class="pull-left">
+                            &amp;nbsp;
+                        </div>
+                        <div t-if="report_type == 'pdf'" class="pull-right" style="margin-right: 25px">
+                            <span class="page"/>/<span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div t-attf-class="{{'row text-black' if not with_images and not with_blknum and not with_pagenum else 'd-none' }}" style="background-color:#fff;font-size:14px;">
+                    <div class="col-12 pt8" style="height:35px;">
+                        <div class="pull-left">
+                            &amp;nbsp;
+                        </div>
+                        <div t-if="report_type == 'pdf'" class="pull-right" style="margin-right: 25px">
+                            Pagina: <span class="page"/> / <span class="topage"/>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_part_label">
+    <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="o">
+            <div class="page">
+                <div class="row">
+                    <div class="col-4 pt24" style="height:180px;">
+                        <img t-if="o.sale_line_id.image_filename" class="img d-block mx-auto" t-att-src="o.sale_line_id.image_url" style="min-height:50%;max-height:95%;max-width:50%;max-width:95%;" alt="Product"/>
+                    </div>
+                    <div class="col-8" style="height:180px;padding-left:0px;">
+                        <div style="height:25%;">
+                            <div style="float:left;font-size:24pt;">
+                                <t t-esc="int(o.ordered_qty)"/>x
+                            </div>
+                            <div style="float:right;">
+                                <img class="img d-block" t-att-src="image_data_uri(res_company.logo)" style="max-height:95%;" alt="Logo"/>
+                            </div>
+                        </div>
+                        <div style="height:25%;position:relative;">
+                            <div style="position:absolute;left:0;font-size:24pt;">
+                                <t t-if="o.sale_line_id.rpp_colour">
+                                    <t t-esc="o.sale_line_id.rpp_colour[0:12]"/>
+                                </t>
+                            </div>
+                            <div style="position:absolute;right:0;font-size:16pt;">
+                                <t t-if="o.sale_line_id.rpp_post_processing_services">
+                                    + <span t-esc="o.sale_line_id.rpp_post_processing_services[0:10]"/>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="text-center" style="height:50%;">
+                            <table class="text-center" width="100%;" style="height:100%;">
+                                <tr>
+                                    <td style="height:25%;font-size:6pt;vertical-align:bottom;">
+                                        <span t-field="o.sale_line_id.filename"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height:20%;">
+                                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="min-width:100%;max-height:20%;"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height:33%;font-size:10pt;">
+                                        <span t-field="o.name"/> (<span t-field="o.product_id.name"/>)
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>

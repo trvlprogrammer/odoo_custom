@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+<template id="report_lot_label" inherit_id="stock.report_lot_label">
+    <t t-call="web.basic_layout" position="replace">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <style type="text/css">
+                        {box-sizing: border-box;}
+                        body {margin: 0;}
+                        .row {
+                            display:flex;
+                            justify-content:flex-start;
+                            align-items:stretch;
+                            flex-wrap:nowrap;
+                            padding-top:10px;
+                            padding-right:10px;
+                            padding-bottom:10px;
+                            padding-left:10px;
+                            }
+                        }
+                    </style>
+                    <div class="row">
+                        <div style="min-height:25px;color:white;float:none;background-color:black;padding:10px;" class="col-12">
+                            <span>PRODUCT</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div  class="col-3">
+                            <img t-if="o.sale_line_id.image_filename" class="image" t-att-src="o.sale_line_id.image_url" style="border:auto;max-width:100%;height:auto;"/>
+                        </div>
+                        <div  class="col-9">
+                            <span t-field="o.sale_line_id.name"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="min-height:40px;padding:10px;font-size:25px;font-weight:700;">
+                            <span>QTY <span t-field="o.sale_line_id.product_uom_qty"/></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div  class="col-3">
+                            <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-width:100%;padding-top:20px"/>
+                        </div>
+                        <div  class="col-9">
+                            <div style="min-height:20px;background-color:black;"/>
+                            <div>
+                                <img style="width:700px;height:50px;margin-top:50px;  display: block; margin-left: auto; margin-right: auto;"
+                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.sale_line_id.product_id.default_code, 600, 100)"
+                                />
+                            </div>
+                            <div style="min-height:25px;">
+                                <p class="text-center" t-field="o.sale_line_id.product_id.default_code"></p>
+                            </div>
+                            <div>
+                                <img style="width:700px;height:50px;margin-top:50px;  display: block; margin-left: auto; margin-right: auto;"
+                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)"
+                                />
+                            </div>
+                            <div style="min-height:25px;">
+                                <p class="text-center" t-field="o.name"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</odoo>
